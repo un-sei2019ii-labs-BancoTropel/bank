@@ -1,0 +1,11 @@
+El codigo utilizado para la solucion del camino mas corto no pertenece a ninguno de 
+los integrantes del grupo.
+
+Dicho codigo fue sacado de la siguiente pagina:
+https://github.com/jariasf/Online-Judges-Solutions/blob/master/Algorithms/JAVA/Graph%20Theory/DijkstraAlgorithm.java
+
+El autor del codigo es:
+Jhosimar George Arias Figueroa
+
+El Algoritmo de Dijkstra resuelve el problema de los caminos más cortos desde un único 
+vértice origen hasta todos los otros vértices del grafo.

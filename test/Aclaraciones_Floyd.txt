@@ -1,0 +1,14 @@
+El codigo utilizado para la solucion del camino mas corto no pertenece a ninguno de 
+los integrantes del grupo.
+
+Dicho codigo fue sacado de la siguiente pagina:
+https://www.geeksforgeeks.org/floyd-warshall-algorithm-dp-16/
+
+El autor del codigo es:
+Aakash Hasija
+
+Fue mejorado dentro de la misma pagina por los autores:
+Abdul Mateen Mohammed, abhayscholar1995, AnkitRai01 y rathbhupendra
+
+El Algoritmo de Floyd - Warshall, resuelve el problema de los caminos más cortos 
+entre todos los vértices.

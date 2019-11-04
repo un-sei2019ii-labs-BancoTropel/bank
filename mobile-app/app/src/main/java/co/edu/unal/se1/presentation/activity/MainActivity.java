@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void openMain(){
+    public void openTransaction(){
         Intent intent = new Intent(this,TransactionActivity.class);
         startActivity(intent);
     }

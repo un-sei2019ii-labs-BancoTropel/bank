@@ -15,7 +15,7 @@ import co.edu.unal.se1.businessLogic.controller.UserController;
 import co.edu.unal.se1.dataAccess.model.User;
 import co.edu.unal.se1.dataAccess.repository.UserRepository;
 
-public class MainActivity extends AppCompatActivity {
+public class TransactionActivity extends AppCompatActivity {
 
     private UserController userController;
 

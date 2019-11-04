@@ -22,6 +22,9 @@ public interface AccDao {
     @Query("SELECT * FROM useracc WHERE accid = ( SELECT max(accid) FROM useracc)")
     int getMaxAccId();
 
+    @Query("SELECT * FROM useracc WHERE user_id = :id")
+    UserAcc getAccByUser(int id);
+
     @Insert
     void createAcc(UserAcc user);
 

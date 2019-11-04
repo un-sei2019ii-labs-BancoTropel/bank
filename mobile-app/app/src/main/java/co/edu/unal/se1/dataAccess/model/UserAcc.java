@@ -25,6 +25,8 @@ public class UserAcc implements Serializable {
 
     @ColumnInfo(name = "Type") public boolean type;
 
+    @ColumnInfo(name = "Password") public int Pass;
+
     public int getId() {
         return accid;
     }
@@ -44,6 +46,16 @@ public class UserAcc implements Serializable {
     public void setAdmin(boolean type){ this.type = type; }
 
     public void setUserId(int userId){ this.userId = userId; }
+
+    public void setPassword(int pass){
+        if (String.valueOf(pass).length()==6){
+            this.Pass = pass;
+        }else{
+            System.out.println("Tamaño de contraseña incorrecta");
+        }
+    }
+
+    public int getPassword () { return Pass; }
 
 }
 

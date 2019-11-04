@@ -29,7 +29,6 @@ public interface TransDao {
     @Query("SELECT * FROM `transaction` WHERE accone = :accone")
     List<Transaction> getTransOfAcc(int accone);
 
-
     @Insert
     void createTrans(Transaction trans);
 

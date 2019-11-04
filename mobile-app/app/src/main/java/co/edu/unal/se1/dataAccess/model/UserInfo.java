@@ -47,5 +47,6 @@ public class UserInfo implements Serializable {
     public void setPhone(int phone) { this.phone = phone;}
 
     public void setAddress(String address) { this.address = address; }
+
 }
 

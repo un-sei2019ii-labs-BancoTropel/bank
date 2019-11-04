@@ -52,6 +52,8 @@ public class UserRepository {
         return database.accDao().getAccById(id);
     }
 
+    public UserAcc getAccByUser(int id){ return database.accDao().getAccByUser(id); }
+
     public void createAcc(final UserAcc user) {
         database.accDao().createAcc(user);
     }

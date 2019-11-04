@@ -12,7 +12,8 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import co.edu.unal.se1.R;
 import co.edu.unal.se1.businessLogic.controller.UserController;
-import co.edu.unal.se1.dataAccess.model.User;
+import co.edu.unal.se1.dataAccess.model.UserInfo;
+import co.edu.unal.se1.dataAccess.model.UserAcc;
 import co.edu.unal.se1.dataAccess.repository.UserRepository;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,18 +29,23 @@ public class MainActivity extends AppCompatActivity {
         final TextInputEditText nameInput = findViewById(R.id.name);
         final TextInputEditText balanceInput = findViewById(R.id.balance);
 
+
         Button createButton = findViewById(R.id.createButton);
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                User user = new User();
+
+                UserInfo user = new UserInfo();
+                UserAcc acc = new UserAcc();
                 user.setId(Integer.parseInt(idInput.getText().toString()));
                 user.setName(nameInput.getText().toString());
-                user.setBalance(Double.parseDouble(balanceInput.getText().toString()));
+                acc.setBalance(Double.parseDouble(balanceInput.getText().toString()));
+
 
                 userController = new UserController();
-                userController.createUser(user, getApplicationContext());
+                userController.createUser(user, getApplicationContext(), acc);
+
             }
         });
 

@@ -2,8 +2,11 @@ package co.edu.unal.se1.businessLogic.controller;
 
 import android.content.Context;
 
-import co.edu.unal.se1.dataAccess.model.User;
+import co.edu.unal.se1.dataAccess.model.UserInfo;
+import co.edu.unal.se1.dataAccess.model.UserAcc;
+import co.edu.unal.se1.dataAccess.model.Transaction;
 import co.edu.unal.se1.dataAccess.repository.UserRepository;
+import java.util.List;
 
 public class UserController {
 
@@ -13,10 +16,13 @@ public class UserController {
 
     }
 
-    public void createUser(User user, Context context) {
+    public void createUser(UserInfo user, Context context, UserAcc acc) {
 
         userRepository = new UserRepository(context);
         userRepository.createUser(user);
+        int max = userRepository.getMaxAccId();
+        acc.setId(max);
+        userRepository.createAcc(acc);
         System.out.println("¡Usuario creado satisfactoriamente!");
     }
 
@@ -24,32 +30,40 @@ public class UserController {
 
         userRepository = new UserRepository(context);
 
-        final User sourceUser = userRepository.getUserById(sourceId);
-        System.out.println("Source User - ID: " + sourceUser.getId() +
-                ", Name: " + sourceUser.getName() +
-                ", Balance: " + sourceUser.getBalance());
+        Transaction trans = new Transaction();
+        int MaxId = userRepository.getMaxTransId();
+        //se establece la id como la mayor actual +1
+        trans.setId(MaxId+1);
 
-        if (sourceUser.getBalance() >= value) {
+        final UserAcc sourceAcc = userRepository.getAccById(sourceId);
+        final UserInfo sourceInfo = userRepository.getUserById(sourceAcc.userId);
+        //se establece la cuenta de salida y el valor enviado
+        trans.setAccone(sourceAcc.getId());
+        trans.setAmount(value);
 
-            final User targetUser = userRepository.getUserById(targetId);
-            System.out.println("Target User - ID: " + targetUser.getId() +
-                    ", Name: " + targetUser.getName() +
-                    ", Balance: " + targetUser.getBalance());
+        if (sourceAcc.getBalance() >= value) {
 
-            sourceUser.setBalance(sourceUser.getBalance() - value);
-            targetUser.setBalance(targetUser.getBalance() + value);
-            userRepository.updateUser(sourceUser);
-            userRepository.updateUser(targetUser);
+            final UserAcc targetAcc = userRepository.getAccById(targetId);
+            final UserInfo targetInfo = userRepository.getUserById(targetAcc.userId);
+            //se establece la cuenta de destino
+            trans.setAcctwo(targetAcc.getId());
 
-            final User updatedSourceUser = userRepository.getUserById(sourceId);
-            System.out.println("Source User (updated) - ID: " + updatedSourceUser.getId() +
-                    ", Name: " + updatedSourceUser.getName() +
-                    ", Balance: " + updatedSourceUser.getBalance());
+            sourceAcc.setBalance(sourceAcc.getBalance() - value);
+            targetAcc.setBalance(targetAcc.getBalance() + value);
+            userRepository.updateAcc(sourceAcc);
+            userRepository.updateAcc(targetAcc);
 
-            final User updatedTargetUser = userRepository.getUserById(targetId);
-            System.out.println("Target User (updated) - ID: " + updatedTargetUser.getId() +
-                    ", Name: " + updatedTargetUser.getName() +
-                    ", Balance: " + updatedTargetUser.getBalance());
+            final UserAcc updatedSourceAcc = userRepository.getAccById(sourceId);
+            final UserInfo updatedSourceUser = userRepository.getUserById(updatedSourceAcc.userId);
+
+            final UserAcc updatedTargetAcc = userRepository.getAccById(targetId);
+            final UserInfo updatedTargetUser = userRepository.getUserById(updatedTargetAcc.userId);
+
+            //se registra la transaccion
+            userRepository.createTrans(trans);
+
+            //se informa de la transaccion
+            System.out.println("transacción realizada satisfactoriamente");
 
             return true;
 
@@ -59,4 +73,30 @@ public class UserController {
         }
 
     }
+
+    public void DeleteUser (UserInfo user, Context context, UserAcc acc){
+
+
+    }
+
+    public void ShowTransaction(Transaction trans){
+
+        String name = userRepository.getUserById(trans.getAccone()).getName();
+        String nametwo = userRepository.getUserById(trans.getAcctwo()).getName();
+        System.out.println("Source Account - ID: " + trans.getAccone() +
+                ", Name Source: "+ name +
+                ", Amount Send: " + trans.getAmount()+
+                ", Name Target: " + nametwo +
+                "Target Account - ID: " + trans.getAcctwo());
+
+    }
+
+    public void ShowHistory (UserAcc acc){
+
+
+        List<Transaction> AllTrans = userRepository.getTransOfAcc(acc.getId());
+
+
+    }
+
 }

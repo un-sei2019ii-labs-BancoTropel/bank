@@ -7,23 +7,26 @@ import androidx.room.Query;
 import androidx.room.Update;
 import java.util.List;
 
-import co.edu.unal.se1.dataAccess.model.User;
+import co.edu.unal.se1.dataAccess.model.UserInfo;
+import co.edu.unal.se1.dataAccess.model.UserAcc;
 
 @Dao
 public interface UserDao {
 
-    @Query("SELECT * FROM user")
-    List<User> getAllUsers();
+    @Query("SELECT * FROM UserInfo")
+    List<UserInfo> getAllUsers();
 
-    @Query("SELECT * FROM user WHERE id = :id")
-    User getUserById(int id);
+    @Query("SELECT * FROM UserInfo WHERE id = :id")
+    UserInfo getUserById(int id);
 
     @Insert
-    void createUser(User user);
+    void createUser(UserInfo user);
 
     @Update
-    void updateUser(User user);
+    void updateUser(UserInfo user);
 
     @Delete
-    void deleteUser(User user);
+    void deleteUser(UserInfo user);
+
 }
+

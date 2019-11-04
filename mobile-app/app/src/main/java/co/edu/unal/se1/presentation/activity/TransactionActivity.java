@@ -12,12 +12,13 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import co.edu.unal.se1.R;
 import co.edu.unal.se1.businessLogic.controller.UserController;
-import co.edu.unal.se1.dataAccess.model.User;
+import co.edu.unal.se1.businessLogic.controller.AccController;
+import co.edu.unal.se1.dataAccess.model.UserAcc;
 import co.edu.unal.se1.dataAccess.repository.UserRepository;
 
 public class TransactionActivity extends AppCompatActivity {
 
-    private UserController userController;
+    private AccController accController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +35,13 @@ public class TransactionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                userController = new UserController();
+                accController = new AccController();
 
                 int sourceId = Integer.parseInt(sourceIdInput.getText().toString());
                 int targetId = Integer.parseInt(targetIdInput.getText().toString());
                 double value = Double.parseDouble(valueInput.getText().toString());
 
-                boolean transaction = userController.sendMoney(sourceId, targetId, value, getApplicationContext());
+                boolean transaction = accController.sendMoney(sourceId, targetId, value, getApplicationContext());
 
                 if (transaction) {
                     System.out.println("¡Transacción satisfactoria!");

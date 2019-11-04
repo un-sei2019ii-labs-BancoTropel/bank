@@ -7,11 +7,18 @@
     tools:context=".presentation.activity.MainActivity">
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -58,18 +65,34 @@
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
 
-                                <Button
-                                    android:id="@+id/createButton"
+                                <com.google.android.material.textfield.TextInputLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Crear Usuario" />
+                                    android:layout_height="wrap_content">
 
-                                <Button
-                                    android:id="@+id/tButton"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Ir a transacciones" />
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/Pass"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:hint="Password" />
 
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical">
+
+                                        <Button
+                                            android:id="@+id/createButton"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Crear Usuario" />
+
+                                        <Button
+                                            android:id="@+id/tButton"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Ir a transacciones" />
+                                    </LinearLayout>
+                                </com.google.android.material.textfield.TextInputLayout>
                             </LinearLayout>
                         </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>

@@ -6,7 +6,8 @@ import androidx.room.PrimaryKey;
 import java.io.Serializable;
 
 @Entity
-public class User implements Serializable {
+
+public class UserInfo implements Serializable {
 
     @PrimaryKey
     public int id;
@@ -14,8 +15,14 @@ public class User implements Serializable {
     @ColumnInfo(name = "name")
     public String name;
 
-    @ColumnInfo(name = "balance")
-    public double balance;
+    @ColumnInfo(name = "email")
+    public String email;
+
+    @ColumnInfo(name = "phone")
+    public int phone;
+
+    @ColumnInfo(name = "address")
+    public String address;
 
     public int getId() {
         return id;
@@ -33,11 +40,13 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public double getBalance() {
-        return balance;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
+    public void setPhone(int phone) { this.phone = phone;}
+
+    public void setAddress(String address) { this.address = address; }
+
 }
+

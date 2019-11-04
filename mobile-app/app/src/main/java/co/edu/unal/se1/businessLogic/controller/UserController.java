@@ -2,8 +2,12 @@ package co.edu.unal.se1.businessLogic.controller;
 
 import android.content.Context;
 
-import co.edu.unal.se1.dataAccess.model.User;
+import co.edu.unal.se1.dataAccess.model.UserInfo;
+import co.edu.unal.se1.dataAccess.model.UserAcc;
+import co.edu.unal.se1.dataAccess.model.Transaction;
 import co.edu.unal.se1.dataAccess.repository.UserRepository;
+import java.util.Calendar;
+import java.util.List;
 
 public class UserController {
 
@@ -13,50 +17,78 @@ public class UserController {
 
     }
 
-    public void createUser(User user, Context context) {
+    public void createUser(UserInfo user, Context context, UserAcc acc) {
 
         userRepository = new UserRepository(context);
         userRepository.createUser(user);
+        int max = userRepository.getMaxAccId();
+        acc.setId(max);
+        userRepository.createAcc(acc);
         System.out.println("¡Usuario creado satisfactoriamente!");
     }
 
-    public boolean sendMoney(int sourceId, int targetId, double value, Context context) {
+    public boolean DeleteUser (UserInfo user, Context context, UserAcc acc){
 
         userRepository = new UserRepository(context);
 
-        final User sourceUser = userRepository.getUserById(sourceId);
-        System.out.println("Source User - ID: " + sourceUser.getId() +
-                ", Name: " + sourceUser.getName() +
-                ", Balance: " + sourceUser.getBalance());
+        double balance = acc.getBalance();
 
-        if (sourceUser.getBalance() >= value) {
+        if (balance==0){
 
-            final User targetUser = userRepository.getUserById(targetId);
-            System.out.println("Target User - ID: " + targetUser.getId() +
-                    ", Name: " + targetUser.getName() +
-                    ", Balance: " + targetUser.getBalance());
-
-            sourceUser.setBalance(sourceUser.getBalance() - value);
-            targetUser.setBalance(targetUser.getBalance() + value);
-            userRepository.updateUser(sourceUser);
-            userRepository.updateUser(targetUser);
-
-            final User updatedSourceUser = userRepository.getUserById(sourceId);
-            System.out.println("Source User (updated) - ID: " + updatedSourceUser.getId() +
-                    ", Name: " + updatedSourceUser.getName() +
-                    ", Balance: " + updatedSourceUser.getBalance());
-
-            final User updatedTargetUser = userRepository.getUserById(targetId);
-            System.out.println("Target User (updated) - ID: " + updatedTargetUser.getId() +
-                    ", Name: " + updatedTargetUser.getName() +
-                    ", Balance: " + updatedTargetUser.getBalance());
+            userRepository.deleteAcc(acc.getId());
+            userRepository.deleteUser(user.getId());
+            System.out.println("Usuario y cuenta borrados con exito");
 
             return true;
 
-        } else {
+        }
+        else{
 
+            System.out.println("No se puede eliminar la cuenta porque el balance de la cuenta no es cero");
             return false;
         }
+    }
+
+    public void SetOrChangeEmail (int userId, Context context, String email){
+
+        userRepository = new UserRepository(context);
+
+        UserInfo user = userRepository.getUserById(userId);
+
+        user.setEmail(email);
+
+        userRepository.updateUser(user);
+
+        System.out.println("Contraseña registrada con exito");
 
     }
+
+    public void SetOrChangePhone (int userId, Context context, int Phone){
+
+        userRepository = new UserRepository(context);
+
+        UserInfo user = userRepository.getUserById(userId);
+
+        user.setPhone(Phone);
+
+        userRepository.updateUser(user);
+
+        System.out.println("Telefono registrado con exito");
+
+    }
+
+    public void SetOrChangeAddress (int userId, Context context, String address){
+
+        userRepository = new UserRepository(context);
+
+        UserInfo user = userRepository.getUserById(userId);
+
+        user.setAddress(address);
+
+        userRepository.updateUser(user);
+
+        System.out.println("Dirección registrada con exito");
+
+    }
+
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.activity.MainActivity">
+    tools:context=".presentation.activity.TransactionActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -25,10 +25,10 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/id"
+                android:id="@+id/sourceId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="ID" />
+                android:hint="Origen" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -40,10 +40,10 @@
                     android:layout_height="match_parent">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/name"
+                        android:id="@+id/targetId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Nombre" />
+                        android:hint="Destino" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -55,44 +55,28 @@
                             android:layout_height="match_parent">
 
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/balance"
+                                android:id="@+id/value"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Saldo" />
+                                android:hint="Valor" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
 
-                                <com.google.android.material.textfield.TextInputLayout
+                                <Button
+                                    android:id="@+id/sendMoneyButton"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
+                                    android:layout_height="wrap_content"
+                                    android:text="Enviar Dinero" />
 
-                                    <com.google.android.material.textfield.TextInputEditText
-                                        android:id="@+id/Pass"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:hint="Password" />
+                                <Button
+                                    android:id="@+id/uButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Ir a crear usuario" />
 
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:orientation="vertical">
-
-                                        <Button
-                                            android:id="@+id/createButton"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:text="Crear Usuario" />
-
-                                        <Button
-                                            android:id="@+id/tButton"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:text="Ir a transacciones" />
-                                    </LinearLayout>
-                                </com.google.android.material.textfield.TextInputLayout>
                             </LinearLayout>
                         </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
@@ -100,4 +84,5 @@
             </LinearLayout>
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

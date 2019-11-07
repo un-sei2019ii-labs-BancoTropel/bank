@@ -21,3 +21,4 @@ public abstract class Database extends RoomDatabase {
     public abstract TransDao transDao();
 
 }
+
